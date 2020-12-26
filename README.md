@@ -1,4 +1,4 @@
-# Interview Scheduler
+# Images Repository
 
 ## Setup
 
