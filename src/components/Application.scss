@@ -1,38 +1,27 @@
-@import "styles/variables.scss";
+// Bootstrap 4 breakpoints & gutter
+$grid-breakpoints: (
+    xs: 0,
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1500px
+) !default;
 
-.sidebar {
-  background-color: $dark-background;
-  box-shadow: 0px 4px 8px rgba($dark-background, 0.5);
-  display: flex;
-  flex-direction: column;
-  min-width: 18rem;
-  padding: $spacing 0;
+$grid-gutter-width: 30px !default;
 
-  &--centered {
-    align-self: center;
-  }
+// number of cards per line for each breakpoint
+$cards-per-line: (
+    xs: 1,
+    sm: 2,
+    md: 3,
+    lg: 4,
+    xl: 5
+);
 
-  &__separator {
-    width: 90%;
-    margin: $spacing 0;
-    border: solid 1px;
-    color: darken($white, 5%);
-  }
-
-  &__menu {
-    flex: 1;
-  }
-
-  &__canmera {
-    margin-top: 2rem;
-  }
-}
-
-.schedule {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  margin: 2rem 0;
-  padding: 0 $spacing;
-  width: 100%;
+@each $name, $breakpoint in $grid-breakpoints {
+	@media (min-width: $breakpoint) {
+		.card-deck .card {
+			flex: 0 0 calc(#{100/map-get($cards-per-line, $name)}% - #{$grid-gutter-width});
+		}
+	}
 }

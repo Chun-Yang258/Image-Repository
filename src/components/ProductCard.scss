@@ -1,0 +1,36 @@
+.custom_card{
+    max-width: 18rem;
+    font-size: 0.9rem;
+    margin-top: 20px;
+    left: 50px;
+    min-height: 25rem;
+
+    &__sold{
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 7px;
+        color: white;
+        background-color: #DB1B8C;
+        border-bottom-right-radius: 14px;
+    }
+
+    &__price {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 10px;
+        background-color: #eee;
+        border-top-right-radius: 4px;
+        border-bottom-left-radius: 20px;
+        font-size: 0.8em;
+    }
+
+    &__footer {
+        position: relative;
+        bottom: 0;
+    }
+}
+
+
+

@@ -4,61 +4,67 @@ import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 
 import "index.scss";
+import "bootstrap/dist/css/bootstrap.min.css";
 
-import Button from "components/Button";
+import NavBar from "components/NavBar";
+import ProductCard from "components/ProductCard";
+import ProductCardList from "components/ProductCardList"
 
-import MenuItem from "components/MenuItem";
-import Menu from "components/Menu";
-
-storiesOf("Button", module)
+storiesOf("NavBar", module)
   .addParameters({
-    backgrounds: [{ name: "dark", value: "#222f3e", default: true }]
+    backgrounds: [{ name: "white", value: "#fff", default: false }]
   })
-  .add("Base", () => <Button>Base</Button>)
-  .add("Confirm", () => <Button confirm>Confirm</Button>)
-  .add("Danger", () => <Button danger>Cancel</Button>)
-  .add("Clickable", () => (
-    <Button onClick={action("button-clicked")}>Clickable</Button>
-  ))
-  .add("Disabled", () => (
-    <Button disabled onClick={action("button-clicked")}>
-      Disabled
-    </Button>
-  ));
+  .add("unlogged NavBar", () =>
+    <NavBar />
+  )
 
-
-storiesOf("MenuItem", module) 
-  .addParameters({
-    backgrounds: [{ name: "dark", value: "#222f3e", default: true }]
-  }) // Provides the default background color for our component
-  .add("Unselected", () => <MenuItem name="Shop" />) // To define our stories, we call add() once for each of our test states to generate a story
-  .add("Selected", () => <MenuItem name="My Inventory" selected />)
-  .add("Clickable", () => (
-    <MenuItem name="Upload" setItem={action("setActiveTab")} /> // action() allows us to create a callback that appears in the actions panel when clicked
-  ));
-
-let menuItems = [
+let imageList = [
   {
     id: 1,
-    name: "Shop"
+    name: "Nature photography",
+    description: "It looked as it would seem in a storybook. The sights, the sounds, the smells and the tastes were out of the world. The sky, punched with clouds stretching like a dome. I could smell the caramel in the air and the music of the meadow echoed in my ears.",
+    price: 120,
+    stock: 11,
+    src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgs2LWfxghY2RmJt1sSMMMWK3C2werAeH0mA&usqp=CAU"
   },
   {
-    id: 2,
-    name: "My Inventory"
-  },
-  {
-    id: 3,
-    name: "Upload"
+    id: 1,
+    name: "Nature photography",
+    description: "This is a test picture",
+    price: 220,
+    stock: 0,
+    src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgs2LWfxghY2RmJt1sSMMMWK3C2werAeH0mA&usqp=CAU"
   }
 ]
 
-storiesOf("Menu", module)
+let image = {
+  id: 1,
+  name: "Nature photography",
+  description: "It looked as it would seem in a storybook. The sights, the sounds, the smells and the tastes were out of the world. The sky, punched with clouds stretching like a dome. I could smell the caramel in the air and the music of the meadow echoed in my ears.",
+  price: 220,
+  stock: 11,
+  src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgs2LWfxghY2RmJt1sSMMMWK3C2werAeH0mA&usqp=CAU"
+}
+
+let sold_out_image = {
+  id: 1,
+  name: "Nature photography",
+  description: "It looked as it would seem in a storybook. The sights, the sounds, the smells and the tastes were out of the world. The sky, punched with clouds stretching like a dome. I could smell the caramel in the air and the music of the meadow echoed in my ears.",
+  price: 220,
+  stock: 0,
+  src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgs2LWfxghY2RmJt1sSMMMWK3C2werAeH0mA&usqp=CAU"
+}
+
+storiesOf("Product Card", module)
   .addParameters({
     backgrounds: [{ name: "dark", value: "#222f3e", default: true }]
   })
-  .add("Shop", () => (
-    <Menu menuItems={menuItems} activeTab={"Shop"} setItem={action("setActiveTab")} />
-  ))
-  .add("My Inventory", () => (
-    <Menu menuItems={menuItems} activeTab={"My Inventory"} setItem={action("setActiveTab")} />
-  ));
+  .add("Single Product Card", () =>
+    <ProductCard key={image.id} {...image} />
+  )
+  .add("Product sold out", () =>
+    <ProductCard key={sold_out_image.id} {...sold_out_image} />
+  )
+  .add("List of Product Card", () =>
+    <ProductCardList products={imageList} />
+  )
