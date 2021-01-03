@@ -5,6 +5,10 @@
     left: 50px;
     min-height: 25rem;
 
+    &__img{
+        max-height: 40%;
+    }
+
     &__sold{
         position: absolute;
         top: 0;

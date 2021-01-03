@@ -12,7 +12,7 @@ export default function ProductCard(props){
         <Card className="custom_card">
             {props.stock === 0 && <span className="custom_card__sold">sold out</span> }
             <span className="custom_card__price">${props.price}</span>
-            <Card.Img variant="top" src={props.src} />
+            <Card.Img variant="top" className="custom_card__img" src={props.src} />
             <Card.Body>
                 <Card.Title>{props.name}</Card.Title>
                 <hr/>

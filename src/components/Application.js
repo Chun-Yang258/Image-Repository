@@ -20,23 +20,23 @@ export default function Application(props) {
       src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgs2LWfxghY2RmJt1sSMMMWK3C2werAeH0mA&usqp=CAU"
     },
     {
-      id: 1,
-      name: "Nature photography",
+      id: 2,
+      name: "Nature Insects",
       description: "This is a test picture",
       price: 220,
       stock: 0,
       src: "https://i1.wp.com/digital-photography-school.com/wp-content/uploads/2019/10/Karthika-Gupta-Compelling-Nature-Photos-6.jpg?fit=1500%2C1000&ssl=1"
     },
     {
-      id: 1,
-      name: "Nature photography",
+      id: 3,
+      name: "Sunset",
       description: "This is a test picture",
       price: 200,
       stock: 2,
       src: "https://www.rwongphoto.com/images/xl/RW8461.jpg"
     },
     {
-      id: 1,
+      id: 4,
       name: "Nature photography",
       description: "This is a test picture",
       price: 220,
@@ -44,15 +44,15 @@ export default function Application(props) {
       src: "https://composeclick.com/wp-content/uploads/2018/05/nature-1.jpg"
     },
     {
-      id: 1,
-      name: "Nature photography",
+      id: 5,
+      name: "Sunset",
       description: "This is a test picture",
       price: 220,
       stock: 0,
       src: "https://i0.wp.com/digital-photography-school.com/wp-content/uploads/2018/10/bluebells,_oxfordshire.jpg?fit=1500%2C1000&ssl=1"
     },
     {
-      id: 1,
+      id: 6,
       name: "Nature photography",
       description: "This is a test picture",
       price: 100,
@@ -60,7 +60,7 @@ export default function Application(props) {
       src: "https://expertphotography.com/wp-content/uploads/2018/07/nature-photography-green-tree-plant-leaves.jpg"
     },
     {
-      id: 1,
+      id: 7,
       name: "Nature photography",
       description: "This is a test picture",
       price: 12,
