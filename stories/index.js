@@ -9,11 +9,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import NavBar from "components/NavBar";
 import ProductCard from "components/ProductCard";
 import ProductCardList from "components/ProductCardList"
+import ProductSearch from "components/ProductSearch";
 
 storiesOf("NavBar", module)
-  .addParameters({
-    backgrounds: [{ name: "white", value: "#fff", default: false }]
-  })
   .add("unlogged NavBar", () =>
     <NavBar />
   )
@@ -28,7 +26,7 @@ let imageList = [
     src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgs2LWfxghY2RmJt1sSMMMWK3C2werAeH0mA&usqp=CAU"
   },
   {
-    id: 1,
+    id: 2,
     name: "Nature photography",
     description: "This is a test picture",
     price: 220,
@@ -56,9 +54,6 @@ let sold_out_image = {
 }
 
 storiesOf("Product Card", module)
-  .addParameters({
-    backgrounds: [{ name: "dark", value: "#222f3e", default: true }]
-  })
   .add("Single Product Card", () =>
     <ProductCard key={image.id} {...image} />
   )
@@ -67,4 +62,9 @@ storiesOf("Product Card", module)
   )
   .add("List of Product Card", () =>
     <ProductCardList products={imageList} />
+  )
+
+storiesOf("Forms", module)
+  .add("Product Search Bar", () => 
+    <ProductSearch />
   )

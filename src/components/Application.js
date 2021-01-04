@@ -5,6 +5,7 @@ import "components/Application.scss";
 
 import NavBar from "components/NavBar";
 import ProductCardList from "components/ProductCardList";
+import ProductSearch from "components/ProductSearch";
 
 
 export default function Application(props) {
@@ -73,6 +74,8 @@ export default function Application(props) {
     <main className="layout">
       <NavBar />
       <section className="product_display">
+        <ProductSearch />
+        <br />
         <ProductCardList products={imageList} />
       </section>
     </main>
