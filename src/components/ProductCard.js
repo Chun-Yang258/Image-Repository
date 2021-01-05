@@ -9,7 +9,7 @@ export default function ProductCard(props){
     let formatted_description = props.description.length > 135 ? props.description.slice(0, 135) + " ..." : props.description
 
     return(
-        <Card className="custom_card">
+        <Card className="custom_card shadow p-3 mb-5 bg-white rounded">
             {props.stock === 0 && <span className="custom_card__sold">sold out</span> }
             <span className="custom_card__price">${props.price}</span>
             <Card.Img variant="top" className="custom_card__img" src={props.src} />

@@ -3,4 +3,34 @@
 .custom_nav{
     background-color: $dark-background;
     font-size: 1.1em;
+    padding: 0 !important;
+
+    .navbar-brand{
+        margin-left: 20px;
+    }
+
+    .navbar-item{
+        margin-right: 20px;
+
+        .name{
+            font-size: 0.9em;
+            padding-top: 0;
+            p{
+                margin: 0;
+            }
+        }
+    }
+
+}
+
+.icon-container {
+    display:inline-block;
+    position:relative;
+  }
+
+.troop-level-badge {
+    font-size: 0.7rem;
+    top:5px;
+    position:absolute;
+    right:0;
 }

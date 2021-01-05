@@ -2,6 +2,8 @@ import React from "react";
 
 import { CardDeck } from "react-bootstrap";
 
+import "components/ProductCardList.scss";
+
 import ProductCard from "components/ProductCard";
 
 export default function ProductCardList(props){
@@ -13,7 +15,7 @@ export default function ProductCardList(props){
     ))
 
     return (
-        <CardDeck>
+        <CardDeck className="custom_deck">
             {productList}
         </CardDeck>
     )

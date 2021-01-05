@@ -1,0 +1,32 @@
+.sign-in {
+    width: 37%;
+    min-width: 450px;
+    display: flex;
+    flex-direction: column;
+    padding-left: 50px;
+    margin-top: 50px;
+
+    .title {
+        margin: 10px 0;
+    }
+
+    .buttons {
+        padding-top: 50px;
+        display: flex;
+        justify-content: space-between;
+
+        .btn{
+            padding: 15px 30px;
+        }
+
+        .btn-dark:hover {
+            background-color: white;
+            color: black;
+        }
+
+        .btn-primary:hover{
+            background-color: white;
+            color: #007bff;
+        }
+    }
+}

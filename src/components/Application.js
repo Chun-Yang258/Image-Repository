@@ -1,16 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Switch, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "components/Application.scss";
-
+import { auth } from "../firebase/firebase.utils";
 
 import NavBar from "components/NavBar";
-import ProductCardList from "components/ProductCardList";
-import ProductSearch from "components/ProductSearch";
+import ProductPage from "components/ProductPage";
+import AuthenticationPage from "components/Athentication/AuthenticationPage";
 
 
 export default function Application(props) {
 
-  //const [activeTab, setItem] = useState("Shop")
+  // State
+  const [state, setState] = useState({
+    currentUser: null
+  })
+  console.log(state)
+  useEffect(() => {
+    auth.onAuthStateChanged(
+      user => {
+        setState({currentUser: user})
+        console.log(user)
+      })
+  },[]);
+  //mock data
   let imageList = [
     {
       id: 1,
@@ -69,14 +82,20 @@ export default function Application(props) {
       src: "https://assets.hongkiat.com/uploads/nature-photography/autumn-poolside.jpg"
     }
   ]
-
+  console.log("before", state.currentUser)
+  
   return (
     <main className="layout">
-      <NavBar />
-      <section className="product_display">
-        <ProductSearch />
-        <br />
-        <ProductCardList products={imageList} />
+      <NavBar {...state} />
+      <section className="main-page">
+        <Switch> 
+          <Route 
+            exact 
+            path="/" 
+            component={() => <ProductPage products={imageList} />} 
+          />
+          <Route exact path="/signin" component={AuthenticationPage} />
+        </Switch> 
       </section>
     </main>
   );
