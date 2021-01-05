@@ -15,13 +15,17 @@ export default function Application(props) {
   const [state, setState] = useState({
     currentUser: null
   })
-  console.log(state)
+
   useEffect(() => {
-    auth.onAuthStateChanged(
+    let unsubscribeFromAuth = auth.onAuthStateChanged(
       user => {
         setState({currentUser: user})
-        console.log(user)
+        console.log("inside:",user)
       })
+
+    return function cleanup() {
+      unsubscribeFromAuth();
+    };
   },[]);
   //mock data
   let imageList = [
@@ -82,11 +86,10 @@ export default function Application(props) {
       src: "https://assets.hongkiat.com/uploads/nature-photography/autumn-poolside.jpg"
     }
   ]
-  console.log("before", state.currentUser)
   
   return (
     <main className="layout">
-      <NavBar {...state} />
+      <NavBar currentUser={state.currentUser} />
       <section className="main-page">
         <Switch> 
           <Route 
