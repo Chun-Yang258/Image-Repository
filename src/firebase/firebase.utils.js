@@ -2,15 +2,8 @@ import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
 
-const config = {
-    apiKey: "AIzaSyCveppCGZwk6gbJ4mQDuzuEDOrayj-yGRI",
-    authDomain: "image-repository-db.firebaseapp.com",
-    projectId: "image-repository-db",
-    storageBucket: "image-repository-db.appspot.com",
-    messagingSenderId: "695179209039",
-    appId: "1:695179209039:web:1aeba2b1ced0daee4a7d3a",
-    measurementId: "G-M103PSE5BR"
-};
+// store sensitive info in .env
+const config = JSON.parse(process.env.REACT_APP_FIREBASE_CONFIG)
 
 // Initialize Firebase
 firebase.initializeApp(config);
