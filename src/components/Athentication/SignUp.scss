@@ -1,0 +1,19 @@
+.sign-up {
+    width: 35%;
+    min-width: 275px;
+    margin: 5vw 7vw 7vw;
+
+    .title {
+        margin: 10px 0;
+    }
+
+    .btn{
+        padding: 15px 30px;
+    }
+
+    .btn-dark:hover {
+        background-color: white;
+        color: black;
+    }
+
+}

@@ -9,14 +9,12 @@ import "components/NavBar.scss";
 
 export default function NavBar(props){
 
-    console.log(props.currentUser)
     let title = (
         <Fragment>
             <p>Welcome,</p>
-            <p>{props.currentUser ? props.currentUser.displayName : ""}</p>
+            <p>{props.currentUser ? (props.currentUser.displayName ? props.currentUser.displayName : "User" ) : ""}</p>
         </Fragment>     
         )
-
     return (
         <Navbar className="custom_nav" variant="dark" sticky="top">
             <Navbar.Brand href="#home">

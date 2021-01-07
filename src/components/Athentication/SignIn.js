@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import "components/Athentication/SignIn.scss";
 
 import FormInput from "components/Athentication/FormInput";
-import { signInWithGoogle } from "../../firebase/firebase.utils";
+import { auth, signInWithGoogle } from "../../firebase/firebase.utils";
 
 // props passes state of email and password
 export default function SignIn(props){
@@ -12,16 +12,26 @@ export default function SignIn(props){
         password: ""
     })
 
-    const handleSubmit = e => {
+    const handleSubmit = async e => {
         e.preventDefault();
-        console.log(state)
-        setState({ email: "", password: "" })
+        const { email, password } = state;
+
+        try{
+            auth.signInWithEmailAndPassword(email, password).then((user) => {
+                console.log(user)
+            })
+            setState({ email: "", password: "" });
+            Array.from(document.querySelectorAll("input")).forEach(
+                input => (input.value = "")
+            );
+        }catch(err){
+            console.log(err);
+        }
     }
 
     const handleChange = e => {
         const { value, name } = e.target
-        console.log(value)
-        console.log(state)
+    
         setState(prevSate => {
             return{
                 ...prevSate,
@@ -31,7 +41,7 @@ export default function SignIn(props){
     }
 
     return (
-        <div className='sign-in'>
+        <div className='sign-in p-2'>
                 <h2>Already have an account?</h2>
                 <span className='title'>Sign in with your email and password</span>
 
@@ -52,8 +62,14 @@ export default function SignIn(props){
                     />
                     <div className='buttons'>
                         <button className="btn btn-dark" type='submit'>SIGN IN</button>
-                        <button className="btn btn-primary" onClick={signInWithGoogle}>
-                            SIGN IN with google
+                        <button className="btn btn-custom" onClick={signInWithGoogle}>
+                            <span>SIGN IN WITH </span>
+                            <img
+                                src="images/Google.png"
+                                alt="Google"
+                                className="img-fluid"
+                                width="25" height="25"
+                            />
                         </button>
                     </div>
                     

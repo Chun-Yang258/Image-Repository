@@ -1,10 +1,7 @@
 .sign-in {
     width: 35%;
-    min-width: 450px;
-    display: flex;
-    flex-direction: column;
-    padding-left: 50px;
-    margin-top: 50px;
+    min-width: 275px;
+    margin: 5vw 7vw 7vw;
 
     .title {
         margin: 10px 0;
@@ -24,9 +21,15 @@
             color: black;
         }
 
-        .btn-primary:hover{
-            background-color: white;
-            color: #007bff;
+        .btn-custom{
+            background: linear-gradient(to right, #5f2c82, #AAFFA9);
+            color: white;
+        }
+
+        .btn-custom:hover{
+            background: none;
+            color: purple;
+            border-color: purple;
         }
     }
 }

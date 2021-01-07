@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "components/Application.scss";
-import { auth } from "../firebase/firebase.utils";
+import { auth, createUserProfileDocument } from "../firebase/firebase.utils";
 
 import NavBar from "components/NavBar";
 import ProductPage from "components/ProductPage";
@@ -18,9 +18,23 @@ export default function Application(props) {
 
   useEffect(() => {
     let unsubscribeFromAuth = auth.onAuthStateChanged(
-      user => {
-        setState({currentUser: user})
-        console.log("inside:",user)
+      async userAuth => {
+        console.log(userAuth)
+        if (userAuth){
+          const userRef = await createUserProfileDocument(userAuth);
+
+          userRef.onSnapshot(snapShot => {
+            setState({
+              currentUser: {
+                id: snapShot.id,
+                ...snapShot.data()
+              }
+            })
+          })
+        }else{
+          setState({ currentUser: userAuth })
+        }
+        
       })
 
     return function cleanup() {
