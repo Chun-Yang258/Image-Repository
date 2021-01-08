@@ -31,8 +31,22 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
     return userRef;
 };
 
-// function to get certain images
+// function to convert firebase snapshot correct format *When hooked up with search, may use reduce function to sort out format of output*
+export const convertCollectionsSnapshotToMap = (collections) => {
+    const transformedCollection = collections.docs.map(doc => {
+        const { description, id, name, price, src, stock } = doc.data()
 
+        return {
+            description: description,
+            id: id,
+            name: name,
+            price: price,
+            src: src,
+            stock: stock
+        }
+    })
+    return transformedCollection
+}
 
 // function to add group of images
 export const addImageCollection = async (collectionKey, objectsToAdd) => {

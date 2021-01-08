@@ -50,9 +50,9 @@ export default function SignUp(props){
     const handleChange = evt => {
         const { name, value } = evt.target;
 
-        setState(prevSate => {
+        setState(prevState => {
             return{
-                ...prevSate,
+                ...prevState,
                 [name]: value
             }
         })
