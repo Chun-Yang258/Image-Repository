@@ -10,13 +10,11 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
     if (!userAuth) return;
 
     const userRef = firestore.doc(`users/${userAuth.uid}`)
-    console.log("userRef:",userRef)
-    const snapShot = await userRef.get();
 
-    if(!snapShot.exist) {
+    const snapShot = await userRef.get();
+    if(!snapShot.exists) {
         const { displayName, email } = userAuth;
         const createdAt = new Date();
-
         try{
             await userRef.set({
                 displayName,
@@ -47,6 +45,27 @@ export const convertCollectionsSnapshotToMap = (collections) => {
     })
     return transformedCollection
 }
+
+// function to get User inventory image
+export const getUserInventoryCollection = (collections, inventoryArray) => {
+    let inventoryList = []
+    collections.docs.forEach(item => {
+        if(inventoryArray.includes(item.id)){
+            const { description, id, name, price, src, stock } = item.data()
+            inventoryList.push({
+                description: description,
+                id: id,
+                name: name,
+                price: price,
+                src: src,
+                stock: stock
+            }) 
+        }
+    })
+
+    return inventoryList;
+}
+
 
 // function to add group of images
 export const addImageCollection = async (collectionKey, objectsToAdd) => {

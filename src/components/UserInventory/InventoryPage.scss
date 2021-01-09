@@ -1,0 +1,14 @@
+.custom_outline{
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15px;
+    .image_space{
+        max-width: 40vw;
+        min-width: 30vw;
+    }
+
+    .trash{
+        filter: brightness(50%) sepia(100) saturate(100) hue-rotate(25deg);
+    }
+}

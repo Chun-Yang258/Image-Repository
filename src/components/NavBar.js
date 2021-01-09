@@ -29,7 +29,8 @@ export default function NavBar(props){
                 <Nav.Link as={Link} to="/">SHOP</Nav.Link>
                 {props.currentUser ? 
                     <NavDropdown title={title} id="basic-nav-dropdown" className="name">
-                        <NavDropdown.Item className="text-center" href="#action/3.1">ORDER</NavDropdown.Item>             
+                        <NavDropdown.Item className="text-center" as={Link} to="/inventory">INVENTORY</NavDropdown.Item>             
+                        <NavDropdown.Item className="text-center" href="#action/3.1">ORDER</NavDropdown.Item> 
                         <NavDropdown.Divider />
                         <NavDropdown.Item className="logout text-center" onClick={() => auth.signOut()}>SIGN OUT</NavDropdown.Item>
                     </NavDropdown> : 

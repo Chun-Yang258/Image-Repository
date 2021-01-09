@@ -7,7 +7,7 @@ import { auth, createUserProfileDocument } from "../firebase/firebase.utils";
 import NavBar from "components/NavBar";
 import ProductPage from "components/ProductPage";
 import AuthenticationPage from "components/Athentication/AuthenticationPage";
-
+import InventoryPage from "components/UserInventory/InventoryPage";
 
 export default function Application(props) {
 
@@ -45,12 +45,13 @@ export default function Application(props) {
       <NavBar currentUser={state.currentUser} />
       <section className="main-page">
         <Switch> 
+          <Route exact path="/" component={ProductPage} />
+          <Route exact path="/signin" component={AuthenticationPage} />
           <Route 
             exact 
-            path="/" 
-            component={() => <ProductPage />} 
+            path="/inventory" 
+            component={() => <InventoryPage currentUser={state.currentUser} />} 
           />
-          <Route exact path="/signin" component={AuthenticationPage} />
         </Switch> 
       </section>
     </main>
