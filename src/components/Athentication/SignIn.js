@@ -32,9 +32,9 @@ export default function SignIn(props){
     const handleChange = e => {
         const { value, name } = e.target
     
-        setState(prevSate => {
+        setState(prevState => {
             return{
-                ...prevSate,
+                ...prevState,
                 [name]: value
             }
         })

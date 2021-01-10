@@ -8,6 +8,7 @@ import NavBar from "components/NavBar";
 import ProductPage from "components/ProductPage";
 import AuthenticationPage from "components/Athentication/AuthenticationPage";
 import InventoryPage from "components/UserInventory/InventoryPage";
+import UploadPage from "components/UploadImage/UploadPage";
 
 export default function Application(props) {
 
@@ -52,6 +53,7 @@ export default function Application(props) {
             path="/inventory" 
             component={() => <InventoryPage currentUser={state.currentUser} />} 
           />
+          <Route exact path="/upload" component={UploadPage} />
         </Switch> 
       </section>
     </main>

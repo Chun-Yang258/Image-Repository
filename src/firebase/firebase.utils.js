@@ -1,6 +1,7 @@
 import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
+import "firebase/storage";
 
 // store sensitive info in .env
 const config = JSON.parse(process.env.REACT_APP_FIREBASE_CONFIG)
@@ -66,8 +67,76 @@ export const getUserInventoryCollection = (collections, inventoryArray) => {
     return inventoryList;
 }
 
+// function to add single image to storage
+export const addImageStorage = (file, fileInfo) => {
+    storage.ref(`images/${file.name}`)
+    .getDownloadURL()
+    .catch((error)=>{
+        switch (error.code){
+            case 'storage/object-not-found':
+                // File doesn't exist
+                // if not exist then continue
+                const uploadTask = storage.ref(`images/${file.name}`).put(file);
+                uploadTask.on(
+                    "state_changed",
+                    snapshot => {},
+                    err => {
+                        console.log(error);
+                    },
+                    () => {
+                        storage
+                            .ref("images")
+                            .child(file.name)
+                            .getDownloadURL()
+                            .then(url => {
+                                // get the public url of image and pass it to database image reference
+                                const collectionRef = firestore.collection("images").doc();
+                                const {displayName, description, id, price, stock} = fileInfo
+                                collectionRef.set({
+                                    description: description,
+                                    id: id,
+                                    name: displayName,
+                                    price: price,
+                                    src: url,
+                                    stock: stock
+                                }).then(( ) => {
+                                    // get the id and create inventory in user
+                                    const imageId = collectionRef.id
+                                    const user = firebase.auth().currentUser;
+                                    if(user != null){
+                                        const uid = user.uid;
+                                        const userRef = firestore.collection("users").doc(uid);
+                                        userRef.update({
+                                            inventory: firebase.firestore.FieldValue.arrayUnion(imageId)
+                                        })
+                                    }
+                                })
+                            })    
+                    }
+                )
+                break;
 
-// function to add group of images
+            case 'storage/unauthorized':
+                // User doesn't have permission to access the object
+                break;
+
+            case 'storage/canceled':
+                // User canceled the upload
+                break;
+
+            case 'storage/unknown':
+                // Unknown error occurred, inspect the server response
+                break; 
+            default:
+                break;
+        }     
+    })
+};    
+
+// function to add images reference to User Inventory
+//export const addImageReferenceToUserInventory = async () = {};
+
+// function to add group of images to database
 export const addImageCollection = async (collectionKey, objectsToAdd) => {
     const collectionRef = firestore.collection(collectionKey);
     
@@ -85,6 +154,7 @@ firebase.initializeApp(config);
 
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
+export const storage = firebase.storage();
 
 const provider = new firebase.auth.GoogleAuthProvider();
 provider.setCustomParameters({ prompt: "select_account" });

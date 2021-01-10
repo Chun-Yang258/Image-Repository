@@ -24,7 +24,6 @@ export default function InventoryPage(props){
 
     return(
         <div className="panel panel-default">
-
             <table className="table table-bordered custom_outline">
             <thead>
                 <tr>
