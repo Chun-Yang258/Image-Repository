@@ -11,4 +11,7 @@
     .trash{
         filter: brightness(50%) sepia(100) saturate(100) hue-rotate(25deg);
     }
+    .trash:hover{
+        transform: scale(1.2);
+    }
 }

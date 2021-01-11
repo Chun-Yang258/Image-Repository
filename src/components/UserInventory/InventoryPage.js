@@ -30,6 +30,7 @@ export default function InventoryPage(props){
                     <th colSpan="2">Image</th>
                     <th>Price</th>
                     <th>Qty Remaining</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>

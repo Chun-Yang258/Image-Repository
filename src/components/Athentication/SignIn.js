@@ -18,7 +18,7 @@ export default function SignIn(props){
 
         try{
             auth.signInWithEmailAndPassword(email, password).then((user) => {
-                console.log(user)
+ 
             })
             setState({ email: "", password: "" });
             Array.from(document.querySelectorAll("input")).forEach(

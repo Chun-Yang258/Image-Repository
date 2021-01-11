@@ -37,7 +37,7 @@ export default function MultipleImageUploadComponent(props) {
                 stock: 0
             })         
         }) 
-        console.log("fileArray:",fileArray)
+
         setFile(fileArray);
         setSelectedFiles(filteredfiles);
     }
@@ -51,10 +51,7 @@ export default function MultipleImageUploadComponent(props) {
 
     const handleSubmit = e => {
         e.preventDefault();
-        console.log(selectedFiles)
-        console.log("type:", typeof(selectedFiles))
-        console.log(typeof(file))
-        console.log(file)
+
         for(let i = 0; i < selectedFiles.length; i++) {
             let singlefile = selectedFiles[i]           
             let fileInfo = [...file].find(item => item.filename === singlefile.name)

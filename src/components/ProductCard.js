@@ -8,6 +8,33 @@ export default function ProductCard(props){
     const [show, setShow] = useState(false)
     const handleClose = () => setShow(false)
     const handleShow = () => setShow(true)
+    
+    const handleAddItem = (e) => {
+        e.preventDefault()
+        // add item to shopping cart
+        const { description, id, name, price, src, stock } = props;
+        props.setCart(prevCart => {
+
+            let objectToAdd = {
+                description: description,
+                id: id,
+                name: name,
+                price: price,
+                src: src,
+                stock: stock
+            };
+
+            // check if it is the same item
+            if(!prevCart.some(item => item.id === objectToAdd.id)){
+                console.log("not include:",prevCart)
+                let newCart = [objectToAdd, ...prevCart]
+                return newCart;
+            }
+           
+            return prevCart;
+        })
+        setShow(false);
+    }
 
     let btn_color = props.stock === 0 ? "secondary" : "primary";
     let formatted_description = props.description.length > 135 ? props.description.slice(0, 135) + " ..." : props.description
@@ -26,8 +53,8 @@ export default function ProductCard(props){
             </Card.Body>
             <Card.Footer>
                 <div className="custom_card__footer">
-                    <Button variant={btn_color} size="sm" disabled={props.stock === 0}>Add to Cart</Button>{' '}
-                    <Button variant="info" size="sm" className="float-right" onClick={handleShow}>Details >></Button>{' '}
+                    <Button variant={btn_color} size="sm" className="image-button-animation" disabled={props.stock === 0} onClick={handleAddItem}>Add to Cart</Button>
+                    <Button variant="info" size="sm" className="float-right" onClick={handleShow}>Details >></Button>
                     <Modal show={show} onHide={handleClose} >
                         <Modal.Header closeButton>
                             <Modal.Title>{props.name}</Modal.Title>
@@ -39,8 +66,8 @@ export default function ProductCard(props){
                                         <img alt={props.name} src={props.src} className="img-fluid" />
                                     </Col>
                                     <Col xs={6} md={5}>
-                                        <p>Price: {props.price}</p>
-                                        <p>Owner: unKnown</p>
+                                        <p>Price: ${props.price}</p>
+                                        <br />
                                         <p>{props.stock === 0 ? "Not Available" : "In Stock"}</p>
                                     </Col>
                                 </Row>
@@ -56,8 +83,8 @@ export default function ProductCard(props){
                             <Button variant="secondary" onClick={handleClose}>
                                 Close
                             </Button>
-                            <Button variant="primary" onClick={handleClose}>
-                                Save Changes
+                            <Button variant="primary" className="image-button-animation" disabled={props.stock === 0} onClick={handleAddItem}>
+                                Add to Cart
                             </Button>
                         </Modal.Footer>
                     </Modal>

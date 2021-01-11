@@ -40,13 +40,17 @@ export default function Application(props) {
       unsubscribeFromAuth();
     };
   },[]);
-  
+
   return (
     <main className="layout">
       <NavBar currentUser={state.currentUser} />
       <section className="main-page">
         <Switch> 
-          <Route exact path="/" component={ProductPage} />
+          <Route 
+            exact 
+            path="/"
+            component={() => <ProductPage />}
+          />  
           <Route exact path="/signin" component={AuthenticationPage} />
           <Route 
             exact 

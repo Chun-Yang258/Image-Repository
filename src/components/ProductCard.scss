@@ -32,12 +32,21 @@
     &__footer {
         position: relative;
         bottom: 0;
+
+        
     }
+}
+
+.image-button-animation:active{
+    transform: translateY(1px);
+    outline: none;
 }
 
 .custom__model{
     min-height: 25vh;
 }
+
+
 
 
 

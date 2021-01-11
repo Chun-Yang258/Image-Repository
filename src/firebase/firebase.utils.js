@@ -91,14 +91,14 @@ export const addImageStorage = (file, fileInfo) => {
                             .then(url => {
                                 // get the public url of image and pass it to database image reference
                                 const collectionRef = firestore.collection("images").doc();
-                                const {displayName, description, id, price, stock} = fileInfo
+                                const {displayName, description, price, stock} = fileInfo
                                 collectionRef.set({
                                     description: description,
-                                    id: id,
+                                    id: getRandomID(),
                                     name: displayName,
-                                    price: price,
+                                    price: Number(price),
                                     src: url,
-                                    stock: stock
+                                    stock: Number(stock)
                                 }).then(( ) => {
                                     // get the id and create inventory in user
                                     const imageId = collectionRef.id
@@ -148,6 +148,12 @@ export const addImageCollection = async (collectionKey, objectsToAdd) => {
 
     return await batch.commit()
 }
+
+// helper function
+const getRandomID = () => {
+    return Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 8);
+}
+
 
 // Initialize Firebase
 firebase.initializeApp(config);

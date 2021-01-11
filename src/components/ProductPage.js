@@ -36,7 +36,7 @@ export default function ProductPage(props){
         <Fragment>
             <ProductSearch />
             <br />
-            <ProductCardList products={state.imageCollection} />
+            <ProductCardList products={state.imageCollection}/>
         </Fragment>
     )
 }
