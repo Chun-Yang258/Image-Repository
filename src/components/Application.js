@@ -51,7 +51,10 @@ export default function Application(props) {
             path="/"
             component={() => <ProductPage />}
           />  
-          <Route exact path="/signin" component={AuthenticationPage} />
+          <Route 
+            exact path="/signin" 
+            component={() => <AuthenticationPage currentUser={state.currentUser}/> } 
+          />
           <Route 
             exact 
             path="/inventory" 
