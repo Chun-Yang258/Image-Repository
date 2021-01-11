@@ -4,10 +4,10 @@ import CheckoutItem from "./CheckoutItem";
 import "./Checkout.scss";
 
 export default function CheckoutModal(props){
-    console.log(props)
+
     const handleRemove = (itemToRemove) => {
         let new_cart = props.cart.filter(item => item.id !== itemToRemove.id)
-        console.log(new_cart)
+
         props.setCart(new_cart);
     }
 

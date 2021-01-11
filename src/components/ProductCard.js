@@ -26,7 +26,7 @@ export default function ProductCard(props){
 
             // check if it is the same item
             if(!prevCart.some(item => item.id === objectToAdd.id)){
-                console.log("not include:",prevCart)
+
                 let newCart = [objectToAdd, ...prevCart]
                 return newCart;
             }

@@ -9,9 +9,8 @@ import "components/NavBar.scss";
 
 export default function NavBar(props){
     let title = (
-        <Fragment>
-            <p>Welcome,</p>
-            <p>{props.currentUser ? (props.currentUser.displayName ? props.currentUser.displayName : "User" ) : ""}</p>
+        <Fragment> 
+            <span><img src="images/user.png" alt="User" width="20px"/>{props.currentUser ? (props.currentUser.displayName ? props.currentUser.displayName : "User" ) : ""}</span>
         </Fragment>     
         )
     return (
