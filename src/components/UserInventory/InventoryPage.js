@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { firestore, getUserInventoryCollection } from "../../firebase/firebase.utils";
 import "./InventoryPage.scss";
 import InventoryList from "./InventoryList";
@@ -6,6 +7,14 @@ import InventoryList from "./InventoryList";
 export default function InventoryPage(props){
 
     const [inventory, setInventory] = useState([])
+
+    // if signed in, then automatically redirect to shop page.
+    let history = useHistory();
+    useEffect(() => {
+        if(!props.currentUser){            
+            history.push("/");
+        }
+    })
 
     useEffect(() => {
         const collectionRef = firestore.collection("images");

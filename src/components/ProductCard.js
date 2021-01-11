@@ -25,6 +25,7 @@ export default function ProductCard(props){
             };
 
             // check if it is the same item
+            // since it is image, so there is no point to add multiple image
             if(!prevCart.some(item => item.id === objectToAdd.id)){
 
                 let newCart = [objectToAdd, ...prevCart]

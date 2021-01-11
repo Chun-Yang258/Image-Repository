@@ -52,7 +52,8 @@ export default function Application(props) {
             component={() => <ProductPage />}
           />  
           <Route 
-            exact path="/signin" 
+            exact 
+            path="/signin" 
             component={() => <AuthenticationPage currentUser={state.currentUser}/> } 
           />
           <Route 
@@ -60,7 +61,11 @@ export default function Application(props) {
             path="/inventory" 
             component={() => <InventoryPage currentUser={state.currentUser} />} 
           />
-          <Route exact path="/upload" component={UploadPage} />
+          <Route 
+            exact 
+            path="/upload" 
+            component={() => <UploadPage currentUser={state.currentUser} />}            
+          />
         </Switch> 
       </section>
     </main>
