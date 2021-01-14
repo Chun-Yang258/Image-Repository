@@ -11,7 +11,7 @@ export default function ProductCardList(props){
 
     const [cart, setCart] = useState([]);
     const [modalShow, setModalShow] = useState(false);
-
+    // retrieve shopping cart data in localStorage 
     useEffect(() => {
         const cartData = localStorage.getItem("shopping_cart_data")
         if(cartData){
@@ -19,10 +19,12 @@ export default function ProductCardList(props){
         }
     }, [])
 
+    // change shopping cart data in localStorage when cart data changed
     useEffect(() => {
        localStorage.setItem("shopping_cart_data", JSON.stringify(cart)) 
     }, [cart])
 
+    // Filter out deleted item from shopping cart
 
     let productList = props.products.map(product => (
         <ProductCard

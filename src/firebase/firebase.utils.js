@@ -92,16 +92,17 @@ export const addImageStorage = (file, fileInfo) => {
                                 // get the public url of image and pass it to database image reference
                                 const collectionRef = firestore.collection("images").doc();
                                 const {displayName, description, price, stock} = fileInfo
+                                const imageId = collectionRef.id
                                 collectionRef.set({
+                                    storageRef: file.name,
                                     description: description,
-                                    id: getRandomID(),
+                                    id: imageId,
                                     name: displayName,
                                     price: Number(price),
                                     src: url,
                                     stock: Number(stock)
                                 }).then(( ) => {
                                     // get the id and create inventory in user
-                                    const imageId = collectionRef.id
                                     const user = firebase.auth().currentUser;
                                     if(user != null){
                                         const uid = user.uid;
@@ -133,6 +134,29 @@ export const addImageStorage = (file, fileInfo) => {
     })
 };    
 
+export const deleteUserImageInventoryItems = async (objectsToDelete) => {
+
+    const user = firebase.auth().currentUser;
+    if(user !== null){
+        const collectionRef = firestore.collection("images");
+        const userRef = firestore.collection("users").doc(user.uid);
+        const fileRef = storage.ref("images");
+
+        objectsToDelete.forEach(object => {
+
+            const docRef = collectionRef.doc(object.id)
+            docRef.get().then((doc) => {
+
+                userRef.update({
+                    inventory: firebase.firestore.FieldValue.arrayRemove(object.id)
+                })
+                collectionRef.doc(object.id).delete();
+                fileRef.child(doc.data().storageRef).delete();
+            })
+        })
+    }   
+}
+
 // function to add images reference to User Inventory
 //export const addImageReferenceToUserInventory = async () = {};
 
@@ -150,9 +174,9 @@ export const addImageCollection = async (collectionKey, objectsToAdd) => {
 }
 
 // helper function
-const getRandomID = () => {
-    return Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 8);
-}
+// const getRandomID = () => {
+//     return Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 8);
+// }
 
 
 // Initialize Firebase

@@ -7,13 +7,13 @@ export default function InventoryList(props){
     const inventoryList = props.inventory.map(item => {
         
         return (
-            <InventoryItem key={item.id} item={item} />
+            <InventoryItem key={item.id} item={item} setInventoryToDelete={props.setInventoryToDelete} />
           )
     })
 
     const emptyTbody = (
         <tr>
-            <td colSpan="4" className="text-center text-info font-weight-bold">You do not have any image!</td>
+            <td colSpan="6" className="text-center text-info font-weight-bold">You do not have any image!</td>
         </tr>
     )
 

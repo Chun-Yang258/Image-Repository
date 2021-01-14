@@ -2,6 +2,8 @@ import React, { Fragment, useState } from "react";
 
 import { Modal, Button } from "react-bootstrap";
 
+import { deleteUserImageInventoryItems } from "../../firebase/firebase.utils";
+
 export default function InventoryItem(props){
 
     const [show, setShow] = useState(false);
@@ -10,7 +12,20 @@ export default function InventoryItem(props){
     const handleShow = () => setShow(true);
 
     const handleDelete = () => {
-        alert("implement delete image function!")
+        deleteUserImageInventoryItems([props.item])
+    }
+
+    const handleChange = e => {
+        if(e.target.checked){
+            props.setInventoryToDelete(prevState => {
+                return [props.item, ...prevState]
+            })
+        }else {
+            props.setInventoryToDelete(prevState => {
+                const update = prevState.filter(item => item.id !== props.item.id)
+                return update;
+            })
+        }
     }
 
     const { description, id, name, price, src, stock } = props.item
@@ -18,6 +33,9 @@ export default function InventoryItem(props){
     return (
         <Fragment>
             <tr key={id}>
+                <td >
+                    <input type="checkbox" onChange={handleChange}/>
+                </td>
                 <td className="image_space">
                     <img src={src} alt={name} className="img-thumbnail" />
                 </td>
