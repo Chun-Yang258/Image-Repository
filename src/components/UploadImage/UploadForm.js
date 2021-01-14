@@ -1,11 +1,12 @@
-import React, { useState, useRef } from 'react';
+import React, { Fragment, useState, useRef } from 'react';
 import "./UploadForm.scss";
-
+import { Alert } from "react-bootstrap";
 import UploadFormFileItem from "./UploadFormFileItem";
 import { addImageStorage } from "../../firebase/firebase.utils";
 
 export default function MultipleImageUploadComponent(props) {
 
+    const [alert, setAlert] = useState(false)
     const [file, setFile] = useState([]);
     const [selectedFiles, setSelectedFiles] = useState([]);
 
@@ -60,30 +61,41 @@ export default function MultipleImageUploadComponent(props) {
         setFile([]);
         setSelectedFiles([]);
         fileInputRef.current.value = "";
+        setAlert(true)
     }
 
     let fileLabel = file.length ? `Selected ${file.length} files` : "Choose file"
     
     return (
-        <form className="upload-form">
-            <div className="form-group multi-preview">
-                <div className="accordion md-accordion" id="accordionEx" role="tablist" aria-multiselectable="true">
-                    {fileList}
+        <Fragment>
+            <Alert show={alert} variant="success" onClose={() => setAlert(false)} dismissible>
+                <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
+                <p>
+                Change this and that and try again. Duis mollis, est non commodo
+                luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
+                Cras mattis consectetur purus sit amet fermentum.
+                </p>
+            </Alert>
+            <form className="upload-form">
+                <div className="form-group multi-preview">
+                    <div className="accordion md-accordion" id="accordionEx" role="tablist" aria-multiselectable="true">
+                        {fileList}
+                    </div>
                 </div>
-            </div>
 
-            <div className="form-group">       
-                <div className="input-group">
-                    <div className="custom-file">
-                        <input type="file" className="custom-file-input" id="inputGroupFile04" onChange={uploadMultipleFiles} ref={fileInputRef} multiple />
-                        <label className="custom-file-label" htmlFor="inputGroupFile04">{fileLabel}</label>
-                    </div>
-                    <div className="input-group-append">
-                        <button className="btn btn-outline-secondary" type="button" onClick={handleCancelAll}><img src="images/trash.png" alt="Remove All" className="trash" /></button>
+                <div className="form-group">       
+                    <div className="input-group">
+                        <div className="custom-file">
+                            <input type="file" className="custom-file-input" id="inputGroupFile04" onChange={uploadMultipleFiles} ref={fileInputRef} multiple />
+                            <label className="custom-file-label" htmlFor="inputGroupFile04">{fileLabel}</label>
+                        </div>
+                        <div className="input-group-append">
+                            <button className="btn btn-outline-secondary" type="button" onClick={handleCancelAll}><img src="images/trash.png" alt="Remove All" className="trash" /></button>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <button type="button" className="btn btn-info btn-block" onClick={handleSubmit}>Upload</button>
-        </form>
+                <button type="button" className="btn btn-info btn-block" onClick={handleSubmit}>Upload</button>
+            </form>
+        </Fragment>
     )
 }
