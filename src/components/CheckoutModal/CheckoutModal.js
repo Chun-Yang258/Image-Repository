@@ -13,7 +13,8 @@ export default function CheckoutModal(props){
 
     let sum = 0;
     let checkoutList = props.cart.map(item => {
-        sum += item.price
+        let converted_price = Number(item.price)
+        sum += converted_price
         return <CheckoutItem key={item.id} item={item} handleRemove={handleRemove} />
     })
     sum = sum.toFixed(2);

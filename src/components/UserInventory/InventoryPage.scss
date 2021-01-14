@@ -14,4 +14,11 @@
     .trash:hover{
         transform: scale(1.2);
     }
+
+    .edit{
+        filter: brightness(50%) sepia(100%) saturate(500%) hue-rotate(190deg);
+    }
+    .edit:hover{
+        transform: scale(1.2);
+    }
 }

@@ -52,19 +52,26 @@ export const getUserInventoryCollection = (collections, inventoryArray) => {
     let inventoryList = []
     collections.docs.forEach(item => {
         if(inventoryArray.includes(item.id)){
-            const { description, id, name, price, src, stock } = item.data()
+            const { description, id, name, price, src, stock, storageRef } = item.data()
             inventoryList.push({
                 description: description,
                 id: id,
                 name: name,
                 price: price,
                 src: src,
-                stock: stock
+                stock: stock,
+                storageRef: storageRef
             }) 
         }
     })
 
     return inventoryList;
+}
+
+export const updateImageCollection = (objectToUpdate) => {
+    const collectionRef = firestore.collection("images")
+    const imageId = objectToUpdate.id;
+    collectionRef.doc(imageId).set(objectToUpdate)
 }
 
 // function to add single image to storage

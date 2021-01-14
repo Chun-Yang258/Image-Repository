@@ -4,12 +4,18 @@ import { Modal, Button } from "react-bootstrap";
 
 import { deleteUserImageInventoryItems } from "../../firebase/firebase.utils";
 
+import InventoryEdit from "./InventoryEdit";
+
 export default function InventoryItem(props){
 
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    const [showEdit, setShowEdit] = useState(false)
+    const handleEditClose = () => setShowEdit(false);
+    const handleEditShow = () => setShowEdit(true);
 
     const handleDelete = () => {
         deleteUserImageInventoryItems([props.item])
@@ -51,7 +57,9 @@ export default function InventoryItem(props){
                     {stock}
                 </td>
                 <td >
-                    <img src="images/trash.png" alt="delete" className="trash" onClick={handleShow}/>
+                    <img src="images/edit.png" alt="delete" className="edit" onClick={handleEditShow}/>
+                    <hr/>
+                    <img src="images/trash.png" alt="delete" className="trash" onClick={handleShow}/>     
                 </td>
             </tr>
 
@@ -69,6 +77,7 @@ export default function InventoryItem(props){
                     </Button>
                 </Modal.Footer>
             </Modal>
+            <InventoryEdit item={props.item} handleEditClose={handleEditClose} showEdit={showEdit} />
         </Fragment>
     )
    
