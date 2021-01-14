@@ -32,6 +32,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 
 // function to convert firebase snapshot correct format *When hooked up with search, may use reduce function to sort out format of output*
 export const convertCollectionsSnapshotToMap = (collections) => {
+    console.log(collections.docs)
     const transformedCollection = collections.docs.map(doc => {
         const { description, id, name, price, src, stock } = doc.data()
 
@@ -46,6 +47,36 @@ export const convertCollectionsSnapshotToMap = (collections) => {
     })
     return transformedCollection
 }
+
+// function to search products with certain words in name
+export const searchProductByName = async (keyword) => {
+    return firestore.collection("images").get().then(snapShot => {
+        let result = snapShot.docs.filter(doc => doc.data().name.toLowerCase().includes(keyword.toLowerCase()))
+        console.log("result:",result)
+        let res = result.map(item => {
+            const { description, id, name, price, src, stock } = item.data()
+            
+            return {
+                        description: description,
+                        id: id,
+                        name: name,
+                        price: price,
+                        src: src,
+                        stock: stock
+                    }
+        })
+        console.log('res',res)
+        return res;
+    })
+    // console.log(collectionRef)
+    // let filteredCollection = collectionRef.docs.filter(doc => doc.data().name.toLowerCase().includes(keyword.toLowerCase()))
+    // filteredCollection.map(doc => {
+    //     const { description, id, name, price, src, stock } = doc.data()
+
+    //     
+    // })
+    // return filteredCollection;
+} 
 
 // function to get User inventory image
 export const getUserInventoryCollection = (collections, inventoryArray) => {
