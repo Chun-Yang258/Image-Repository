@@ -4,7 +4,15 @@ import "firebase/auth";
 import "firebase/storage";
 
 // store sensitive info in .env
-const config = JSON.parse(process.env.REACT_APP_FIREBASE_CONFIG)
+//const config = JSON.parse(process.env.REACT_APP_FIREBASE_CONFIG)
+const config = {    
+    apiKey: "AIzaSyCveppCGZwk6gbJ4mQDuzuEDOrayj-yGRI",
+    "authDomain": "image-repository-db.firebaseapp.com",
+    "projectId": "image-repository-db",
+    "messagingSenderId": "695179209039",
+    "appId": "1:695179209039:web:1aeba2b1ced0daee4a7d3a",
+    "measurementId": "G-M103PSE5BR",
+    "storageBucket": "gs://image-repository-db.appspot.com"}
 
 // function to create User Profile in firebase store
 export const createUserProfileDocument = async (userAuth, additionalData) => {
