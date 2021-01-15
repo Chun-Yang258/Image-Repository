@@ -4,7 +4,6 @@ import "firebase/auth";
 import "firebase/storage";
 
 // store sensitive info in .env
-//const config = JSON.parse(process.env.REACT_APP_FIREBASE_CONFIG)
 const config = {    
     apiKey: "AIzaSyCveppCGZwk6gbJ4mQDuzuEDOrayj-yGRI",
     "authDomain": "image-repository-db.firebaseapp.com",
