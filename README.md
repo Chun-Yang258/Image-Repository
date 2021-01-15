@@ -1,9 +1,10 @@
 # Images Repository
 
-## Setup
-
 This application was supported by firebase cloud as database, firebase storage as image storage, Bootstrap and React. You could check the **live demo [HERE](https://image-repository-db.web.app/)** 
+
 Or if you wish to download it to local, please follow the instruction below:
+
+## Setup
 
 1. Copy the codes into local machine:
 - [ ] Fork the code or just download the code into local machine.
